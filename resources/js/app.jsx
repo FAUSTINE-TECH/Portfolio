@@ -1,20 +1,5 @@
 import '../css/app.css'
-
 import { createRoot } from 'react-dom/client'
-import { createInertiaApp } from '@inertiajs/react'
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import Portfolio from './Pages/Portfolio'
 
-createInertiaApp({
-  title: (title) => `${title} — Haïdara Faustine`,
-  resolve: (name) =>
-    resolvePageComponent(
-      `./Pages/${name}.jsx`,
-      import.meta.glob('./Pages/**/*.jsx')
-    ),
-  setup({ el, App, props }) {
-    createRoot(el).render(<App {...props} />)
-  },
-  progress: {
-    color: '#d49418',
-  },
-})
+createRoot(document.getElementById('app')).render(<Portfolio />)

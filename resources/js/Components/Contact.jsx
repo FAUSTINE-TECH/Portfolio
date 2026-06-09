@@ -1,32 +1,47 @@
 import { useState } from 'react'
-import { useForm } from '@inertiajs/react'
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
-
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name:    '',
-    email:   '',
-    subject: '',
-    message: '',
+  const [processing, setProcessing] = useState(false)
+  const [form, setForm] = useState({
+    name: '', email: '', subject: '', message: ''
   })
 
-  const submit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const submit = async (e) => {
     e.preventDefault()
-    post('/contact', {
-      preserveScroll: true,
-      onSuccess: () => {
-        setSent(true)
-        reset()
-      },
-    })
+    setProcessing(true)
+
+    try {
+      await emailjs.send(
+        'service_g4h63xs',    
+        'template_kemmv5u',   
+        {
+          name:        form.name,
+          email:       form.email,
+          title:       form.subject,
+          userMessage: form.message,
+        },
+        'CIdTDygn2qhD2wBUP'     
+      )
+      setSent(true)
+      setForm({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      console.error(err)
+      alert('Erreur lors de l\'envoi. Réessayez.')
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (
     <section id="contact" className="py-28 bg-bordeaux-950 relative overflow-hidden">
 
-      {/* Fond décoratif */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full
                       bg-gradient-to-bl from-bordeaux-800/60 to-transparent blur-3xl -z-0" />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full
@@ -41,19 +56,14 @@ export default function Contact() {
           Travaillons<br />
           <span className="italic text-gold-400">ensemble</span>
         </h2>
-        {/*<p className="text-bordeaux-300 font-light mb-16 max-w-md">
-          Je suis à la recherche d'un stage ou d'une première opportunité professionnelle.
-          N'hésitez pas à me contacter.
-        </p>*/}
 
         <div className="grid lg:grid-cols-5 gap-12">
 
-          {/* Infos contact */}
           <div className="lg:col-span-2 space-y-8">
             {[
-              { icon: Mail,    label: 'Email',     value: 'f.sandrahaidara@gmail.com', href: 'mailto:f.sandrahaidara@gmail.com' },
-              { icon: Phone,   label: 'Téléphone', value: '0657 740 403',              href: 'tel:0657740403' },
-              { icon: MapPin,  label: 'Localité',  value: 'Casablanca · Maroc',        href: null },
+              { icon: Mail,   label: 'Email',     value: 'f.sandrahaidara@gmail.com', href: 'mailto:f.sandrahaidara@gmail.com' },
+              { icon: Phone,  label: 'Téléphone', value: '0657 740 403',              href: 'tel:0657740403' },
+              { icon: MapPin, label: 'Localité',  value: 'Casablanca · Maroc',        href: null },
             ].map((item) => {
               const Icon = item.icon
               const content = (
@@ -68,10 +78,8 @@ export default function Contact() {
                   </div>
                 </div>
               )
-
               return item.href ? (
-                <a key={item.label} href={item.href}
-                   className="block hover:opacity-80 transition-opacity">
+                <a key={item.label} href={item.href} className="block hover:opacity-80 transition-opacity">
                   {content}
                 </a>
               ) : (
@@ -80,7 +88,6 @@ export default function Contact() {
             })}
           </div>
 
-          {/* Formulaire */}
           <div className="lg:col-span-3">
             {sent ? (
               <div className="flex flex-col items-center justify-center h-full gap-4
@@ -104,38 +111,29 @@ export default function Contact() {
                     <label className="block text-xs text-bordeaux-400 mb-2">Nom complet</label>
                     <input
                       type="text"
-                      value={data.name}
-                      onChange={(e) => setData('name', e.target.value)}
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
                       placeholder="Votre nom"
                       className="input-field bg-bordeaux-900/50 border-bordeaux-700
                                  text-cream-100 placeholder-bordeaux-500
                                  focus:border-gold-500 focus:ring-gold-900"
                       required
                     />
-                    {errors.name && (
-                      <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.name}
-                      </p>
-                    )}
                   </div>
-
                   <div>
                     <label className="block text-xs text-bordeaux-400 mb-2">Email</label>
                     <input
                       type="email"
-                      value={data.email}
-                      onChange={(e) => setData('email', e.target.value)}
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
                       placeholder="votre@email.com"
                       className="input-field bg-bordeaux-900/50 border-bordeaux-700
                                  text-cream-100 placeholder-bordeaux-500
                                  focus:border-gold-500 focus:ring-gold-900"
                       required
                     />
-                    {errors.email && (
-                      <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.email}
-                      </p>
-                    )}
                   </div>
                 </div>
 
@@ -143,8 +141,9 @@ export default function Contact() {
                   <label className="block text-xs text-bordeaux-400 mb-2">Sujet</label>
                   <input
                     type="text"
-                    value={data.subject}
-                    onChange={(e) => setData('subject', e.target.value)}
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
                     placeholder="Objet de votre message"
                     className="input-field bg-bordeaux-900/50 border-bordeaux-700
                                text-cream-100 placeholder-bordeaux-500
@@ -156,8 +155,9 @@ export default function Contact() {
                 <div>
                   <label className="block text-xs text-bordeaux-400 mb-2">Message</label>
                   <textarea
-                    value={data.message}
-                    onChange={(e) => setData('message', e.target.value)}
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
                     placeholder="Décrivez votre projet ou opportunité..."
                     rows={5}
                     className="input-field bg-bordeaux-900/50 border-bordeaux-700
@@ -165,11 +165,6 @@ export default function Contact() {
                                focus:border-gold-500 focus:ring-gold-900 resize-none"
                     required
                   />
-                  {errors.message && (
-                    <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-                      <AlertCircle size={12} /> {errors.message}
-                    </p>
-                  )}
                 </div>
 
                 <button
@@ -197,7 +192,6 @@ export default function Contact() {
               </form>
             )}
           </div>
-
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react'
 import Navbar      from '@/Components/Navbar'
 import Hero        from '@/Components/Hero'
 import Competences from '@/Components/Competences'
@@ -6,10 +5,10 @@ import Projets     from '@/Components/Projets'
 import Parcours    from '@/Components/Parcours'
 import Contact     from '@/Components/Contact'
 
-export default function Portfolio({ flash }) {
+export default function Portfolio() {
   return (
     <>
-      <Head title="Portfolio" />
+      <title>Portfolio — Haïdara Faustine</title>
 
       <Navbar />
       <main>
