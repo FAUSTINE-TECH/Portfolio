@@ -4,8 +4,8 @@ const projects = [
   {
     num: '01',
     title: 'Dilink.app',
-    description: 'Plateforme web développée lors de mon stage chez FOULISA à Ouagadougou. Contribution au développement frontend de cette application disponible en ligne.',
-    stack: ['React', 'JavaScript', 'CSS', 'Frontend'],
+    description: 'Plateforme web développée lors de mon stage chez FOULISA à Ouagadougou. Contribution au développement backend de cette application disponible en ligne.',
+    stack: ['Laravel'],
     type: 'Stage · FOULISA',
     year: '2025',
     url: 'https://dilink.app',
@@ -16,7 +16,7 @@ const projects = [
     description: 'Application web complète permettant la saisie, le calcul automatique des moyennes et la consultation des résultats académiques.',
     stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript'],
     type: 'Application web',
-    year: '2024',
+    year: '2025',
   },
   {
     num: '03',
@@ -24,9 +24,16 @@ const projects = [
     description: "Système complet de publication et gestion d'annonces en ligne avec tableau de bord d'administration et interface responsive.",
     stack: ['PHP', 'Laravel', 'Bootstrap', 'MySQL'],
     type: 'Application web',
-    year: '2024',
+    year: '2025',
   },
-  
+  {
+  num: '04',
+  title: 'Plateforme de location de voiture',
+  description: 'Application web permettant la gestion et la réservation de véhicules en ligne avec interface utilisateur intuitive et système de gestion des disponibilités.',
+  stack: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
+  type: 'Application web',
+  year: '2024',
+},
 ]
 
 export default function Projets() {
