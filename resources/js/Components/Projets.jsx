@@ -3,6 +3,24 @@ import { ArrowUpRight } from 'lucide-react'
 const projects = [
   {
     num: '01',
+    title: 'Blessings Consulting',
+    description: 'Refonte complète du site vitrine d’un cabinet de conseil connectant capitaux, opportunités et talents en Afrique. Migration vers une SPA React moderne avec configuration et déploiement continu.',
+    stack: ['React', 'Vite', 'Tailwind CSS'],
+    type: 'Site vitrine · Freelance',
+    year: '2026',
+    url: 'https://blessingsconsulting.com/',
+  },
+  {
+    num: '02',
+    title: 'MARHABA TSM',
+    description: 'Site vitrine pour une société d’assistance et de transfert sanitaire basée à Casablanca : parcours patient, cliniques partenaires et formulaire de demande de devis, du cahier des charges à la mise en ligne.',
+    stack: ['React', 'Vite', 'Tailwind CSS'],
+    type: 'Site vitrine · Freelance',
+    year: '2026',
+    url: 'https://marhaba-tsm.vercel.app/',
+  },
+  {
+    num: '03',
     title: 'Dilink.app',
     description: 'Plateforme web développée lors de mon stage chez FOULISA à Ouagadougou. Contribution au développement backend de cette application disponible en ligne.',
     stack: ['Laravel', 'MySQL'],
@@ -11,7 +29,7 @@ const projects = [
     url: 'https://dilink.app',
   },
   {
-    num: '02',
+    num: '04',
     title: 'Plateforme de gestion de notes',
     description: 'Application web complète permettant la saisie, le calcul automatique des moyennes et la consultation des résultats académiques.',
     stack: ['Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript'],
@@ -19,7 +37,7 @@ const projects = [
     year: '2025',
   },
   {
-    num: '03',
+    num: '05',
     title: "Plateforme d'annonces publicitaires",
     description: "Système complet de publication et gestion d'annonces en ligne avec tableau de bord d'administration et interface responsive.",
     stack: ['PHP', 'Laravel', 'Bootstrap', 'MySQL'],
@@ -27,7 +45,7 @@ const projects = [
     year: '2025',
   },
   {
-  num: '04',
+  num: '06',
   title: 'Plateforme de location de voiture',
   description: 'Application web permettant la gestion et la réservation de véhicules en ligne avec interface utilisateur intuitive et système de gestion des disponibilités.',
   stack: ['HTML', 'CSS', 'Bootstrap', 'Javascript'],
